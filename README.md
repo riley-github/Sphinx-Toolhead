@@ -9,7 +9,7 @@ Pictures:
 
 Input Shaper Results:
 
-Mass Specs:
+Mass Specs / COM:
 
 Currently supported hardware:
 Hotends:
