@@ -13,31 +13,31 @@ Mass Specs / COM:
 
 Currently supported hardware:
 Hotends:
-Goliath
+-Goliath
 
 Extruders:
 Orbiter v2.0
 
 Probes:
-Beacon
+-Beacon
 
 Hardware in progress:
 Hotends:
-Rapido UHF
-Chube Air
-Chube Compact
-Dragon ACE UHF
+-Rapido UHF
+-Chube Air
+-Chube Compact
+-Dragon ACE UHF
 
 Extruders:
-Sherpa mini
-Sherpa Micro
-Vz-Hextrudort Low Plus
-LGX
-LGX Lite
+-Sherpa mini
+-Sherpa Micro
+-Vz-Hextrudort Low Plus
+-LGX
+-LGX Lite
 
 Probes:
-Catrographer
-Btt Eddy
+-Catrographer
+-Btt Eddy
 
 Cooling Capability:
 Sphinx is designed for high speed printing application and is built for high flow hotends. Currently high speed printing faces two main bottlenecks, flow and cooling. Sphinx attempts to eliminate the cooling bottleneck as much as possible. The printed outlet ducts are kept short to keep aero loses to a minumum. The ducts are made to interface with two cpap hoses and designed to work with two ws7040 cpap blowers in parallel for maximum cooling power. I am currently not using ws7040 blowers, but instead using a hacked air matress compressor that outputs roughly 750L/min of air. I understand that most prints do not need this level of cooling performance so it is planned to make a version to be optimized for a single ws7040 blower.
