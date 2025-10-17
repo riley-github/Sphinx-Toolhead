@@ -5,6 +5,9 @@ Sphinx toolhead is aimed to be a high performance toolhead with an emphasis on p
 This project is a work is progress. If you use this toolhead and modify or remix please upload here or reach out and let me know on instagram or discord!
 My instagram is practically_printed and my discord is rileyrandall
 
+**Note**  
+Load the entire step file into orca. The step file has built in supports, so print the main toolhead body with 4 walls and 4 top/bottom and 25% infill, but print the support bodies at 2 wall 3 top/bottom and 10-15% infill. There are modeled supports for beacon mount and hotend mount!
+
 **Pictures:**
 
 **Input Shaper Results:**
