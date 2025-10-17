@@ -48,4 +48,4 @@ Sphinx is designed for high speed printing application and is built for high flo
 **Mounting:**
 Sphinx mounts to a belt bracket that mounts to linear rail. Currently, it is designed for an MGN12H rail, but it can easily be remixed for MGN9 rails if needed (I perfer MGN12 for needed rigidity at high accels). I have two versions of this belt bracket, one printed and one sheet metal. The sheet metal version is designed to be either water jet cut or laser cut and a few m3 threads will have to be tapped. The printed version will need a few m3 heat set insets. I have printed this out of siraya tech abs-cf, but any stiffer material would work.
 
-
+![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-blue.svg)
