@@ -22,7 +22,7 @@ Probes:
 Beacon
 
 **Hardware in progress:**
-Hotends:
+Hotends:  
 Rapido UHF
 Chube Air
 Chube Compact
