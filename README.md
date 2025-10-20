@@ -48,20 +48,21 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 ## 🧰 Currently Supported Hardware
 
 **Hotends:**  
-- Goliath  
+- Goliath
+- Rapido UHF  
 
 **Extruders:**  
 - Orbiter v2.0  
 
 **Probes:**  
-- Beacon  
+- Beacon
+- Cartographer
 
 ---
 
 ## 🔧 Hardware in Progress
 
 **Hotends:**  
-- Rapido UHF  
 - Chube Air  
 - Chube Compact  
 - Dragon ACE UHF  
@@ -73,8 +74,7 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 - LGX  
 - LGX Lite  
 
-**Probes:**  
-- Cartographer  
+**Probes:**    
 - BTT Eddy  
 
 ---
