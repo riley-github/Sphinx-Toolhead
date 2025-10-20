@@ -27,9 +27,9 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 
 ## 📸 Pictures
 
-<img src="Images/IMG_2683.jpeg" alt="Sphinx Toolhead" width="400">
+<img src="Images/IMG_2683.jpeg" alt="Sphinx Toolhead" width="300">
 
-![Sphinx Toolhead](Images/IMG_2677.jpeg)
+<img src="Images/IMG_2677.jpeg" alt="Sphinx Toolhead" width="300">
 
 ---
 
