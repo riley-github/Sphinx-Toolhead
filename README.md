@@ -29,6 +29,8 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 
 ![Sphinx Toolhead](Images/IMG_2683.jpeg)
 
+![Sphinx Toolhead](Images/IMG_2677.jpeg)
+
 ---
 
 ## 📈 Input Shaper Results
