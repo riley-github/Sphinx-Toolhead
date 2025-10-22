@@ -37,7 +37,7 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 
 | Front View | Rear View |
 |:-----------:|:----------:|
-| <img src="Images/IMG_2721.jpeg" width="200"> | <img src="Images/IMG_2722.jpeg" width="200"> |
+| <img src="Images/IMG_2721.png" width="200"> | <img src="Images/IMG_2722.png" width="200"> |
 
 ---
 
