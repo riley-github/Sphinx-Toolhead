@@ -38,6 +38,7 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 | X IS Graph | Y IS Graph |
 |:-----------:|:----------:|
 | <img src="Images/IMG_2721.png" width="300"> | <img src="Images/IMG_2722.png" width="300"> |
+
 *(These graphs were made with the printed toolhead bracket)*
 
 ---
