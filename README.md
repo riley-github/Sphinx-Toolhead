@@ -35,7 +35,9 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 
 ## 📈 Input Shaper Results
 
-*(Add results or graphs here)*
+| Front View | Rear View |
+|:-----------:|:----------:|
+| <img src="Images/IMG_2721.jpeg" width="200"> | <img src="Images/IMG_2722.jpeg" width="200"> |
 
 ---
 
