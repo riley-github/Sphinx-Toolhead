@@ -5,6 +5,8 @@
 Sphinx toolhead is aimed to be a high-performance toolhead with an emphasis on part cooling and rigidity.  
 This project was built around the goal of printing a **quality 4-minute Benchy**.  
 
+This toolhead is designed to be used with Monolith Gantry. Normal voron gantry support will be added in the future.
+
 This project is a **work in progress!**
 
 If you use this toolhead and modify or remix, please upload here or reach out and let me know on Instagram or Discord!  
@@ -18,10 +20,9 @@ If you use this toolhead and modify or remix, please upload here or reach out an
 Load the entire STEP file into Orca.  
 The STEP file has built-in supports, so:
 
-- **Main toolhead body:** 4 walls, 4 top/bottom layers, 25% infill  
-- **Support bodies:** 2 walls, 3 top/bottom layers, 10–15% infill  
+- **Main toolhead body:** 6 walls, 6 top/bottom layers, 25% infill    
 
-There are modeled supports for both the **Beacon mount** and **hotend mount**!
+
 
 ---
 
@@ -52,11 +53,13 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 ## 🧰 Currently Supported Hardware
 
 **Hotends:**  
+- Tricorn
 - Goliath
-- Rapido UHF  
+- CHC XL
+- Rapido UHF 
 
 **Extruders:**  
-- Orbiter v2.0  
+- Sherpa Mini  
 
 **Probes:**  
 - Beacon
@@ -66,48 +69,57 @@ There are modeled supports for both the **Beacon mount** and **hotend mount**!
 
 ## 🔧 Hardware in Progress
 
-**Hotends:**  
-- Chube Air  
+**Hotends:**    
 - Chube Compact  
 - Dragon ACE UHF  
 
 **Extruders:**  
-- Sherpa Mini  
+- Orbiter 2.0 
 - Sherpa Micro  
 - Vz-Hextrudort Low Plus  
-- LGX  
-- LGX Lite  
-
-**Probes:**    
-- BTT Eddy  
+  
 
 ---
 
 ## 🌬️ Cooling Capability
 
-Sphinx is designed for high-speed printing applications and built for **high-flow hotends**.  
-Currently, high-speed printing faces two main bottlenecks: **flow** and **cooling**.  
-Sphinx attempts to eliminate the cooling bottleneck as much as possible.  
+The toolhead’s part cooling system is built specifically around the duct geometry to maximize usable airflow and thrust efficiency, with support for either WS9290 or WS7040 blowers. The 9290 duct option is very aggressive and great for speed printing, but the 7040 duct will not disappoint by any means. The goal of the ducts was to be able to print a perfect 5min benchy. Below is some data I collected that I used to optimize the toolhead ducts for both blowers.
 
-- The printed outlet ducts are kept short to minimize aerodynamic losses.  
-- Ducts interface with **two CPAP hoses** and are designed to work with **two WS7040 CPAP blowers** in parallel for maximum cooling power.  
-- Currently using a **hacked air mattress compressor** that outputs roughly **750 L/min** of air.  
+## Mass Flow (g/s) vs. Outlet Area
 
-Most prints don’t need this level of cooling performance, so a single WS7040-optimized version is planned.
+| Outlet Area | WS9290 | WS7040 |
+|------------|--------|--------|
+| 80         | 3.0    | 1.7    |
+| 100        | 3.6    | 2.0    |
+| 120        | 4.5    | 2.7    |
+| 135        | 4.6    | 2.9    |
+| 150        | 5.2    | 2.8    |
+| 165        | 5.5    | 2.9    |
+| 180        | 5.6    | 3.0    |
+| 210        | 5.9    | 3.0    |
+
+## Force (grams) vs. Outlet Area
+
+| Outlet Area | WS9290 | WS7040 |
+|------------|--------|--------|
+| 80         | 115    | 52     |
+| 100        | 118    | 54     |
+| 120        | 116    | 50     |
+| 135        | 116    | 47     |
+| 150        | 112    | 46     |
+| 165        | 107    | 43     |
+| 180        | 100    | 41     |
+| 210        | 94     | 37     |
 
 ---
 
-## 🧱 Mounting
+## Other Information
 
-Sphinx mounts to a **belt bracket** that attaches to **linear rail**.  
-Currently, it is designed for **MGN12H** rail, but it can easily be remixed for **MGN9** if needed  
-(prefer MGN12 for rigidity at high accelerations).  
+Sphinx is meant to be used with an mgn12H rail carriage. I higher preload x rail is encouraged for best Input Shaper results 
 
-There are **two versions** of the belt bracket:
-- **Printed** version — uses M3 heat set inserts  
-- **Sheet metal** version — designed to be **water jet or laser cut**, and M3 threads must be tapped manually  
+COM for this toolhead was optimized using CNC Sherpa Mini and Tricorn, but will also be should be pretty similar with all other hotends
 
-Tested successfully with **Siraya Tech ABS-CF**, though any stiff material should work.
+Tested successfully with **Siraya Tech ABS-CF**, though any filled abs or better is recommended.
 
 ---
 
