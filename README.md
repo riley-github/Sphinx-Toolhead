@@ -15,6 +15,21 @@ If you use this toolhead and modify or remix, please upload here or reach out an
 
 ---
 
+## 📁 Repository Structure
+
+The repository is organized into the following main directories:
+
+- **[CAD/](CAD/)**: Contains all STEP files for the toolhead, organized by version and hardware variant.
+  - **[V3-Beta/](CAD/V3-Beta/)**: The latest beta version (V3). Highly optimized for part cooling and performance.
+    - Includes variants for **Tricorn**, **Goliath**, **CHC XL**, and **Rapido UHF** hotends.
+    - Supports both **WS7040** and **WS9290** blowers.
+  - **[V2-Stable/](CAD/V2-Stable/)**: The current stable version.
+  - **[Accessories/](CAD/Accessories/)**: Universal parts like CPAP clamps and miscellaneous mounts.
+- **[Images/](Images/)**: Photos, diagrams, and time-lapse videos of the toolhead in action.
+- **[STLs/](STLs/)**: Placeholder for future STL exports.
+
+---
+
 ## 🧩 Notes
 
 Load the entire STEP file into Orca.  
