@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sphinx Toolhead Configurator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f12;
+    --surface: #13161b;
+    --surface2: #1c2028;
+    --border: #2a2f3a;
+    --accent: #5a1a9a;
+    --accent2: #4a9eff;
+    --text: #e8eaed;
+    --text-muted: #7a8090;
+    --panel-w: 350px;
+  }
+
+  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; }
+
+  #app { display: flex; width: 100%; height: 100%; }
+
+  #canvas-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  #canvas-wrap canvas { display: block; width: 100% !important; height: 100% !important; }
+
+  #topbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: linear-gradient(to bottom, rgba(13,15,18,0.95), transparent);
+    z-index: 10;
+    gap: 16px;
+  }
+  #topbar h1 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  #panel {
+    width: var(--panel-w);
+    height: 100%;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+
+  #panel-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  #panel-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .config-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .config-section h3 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .option-btn {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option-btn:hover { border-color: var(--accent); }
+  .option-btn.active {
+    background: rgba(90, 26, 154, 0.15);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  #load-status {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: rgba(13,15,18,0.7);
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 100;
+  }
+
+  #tooltip {
+    position: absolute;
+    display: none;
+    background: rgba(19, 22, 27, 0.95);
+    border: 1px solid var(--accent);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div id="canvas-wrap">
+    <div id="topbar">
+      <h1>Sphinx Configurator</h1>
+    </div>
+    <div id="load-status">Idle</div>
+    <div id="tooltip"></div>
+  </div>
+
+  <div id="panel">
+    <div id="panel-header">
+      <h2>Hardware Selection</h2>
+    </div>
+
+    <div class="config-section">
+      <h3>Version</h3>
+      <div class="options-grid" id="version-options">
+        <button class="option-btn active" data-val="v3">V3 Beta (Recommended)</button>
+        <button class="option-btn" data-val="v2">V2 Stable (Broken configurator)</button>
+      </div>
+    </div>
+
+    <div class="config-section" id="hotend-section">
+      <h3>Hotend</h3>
+      <div class="options-grid" id="hotend-options"></div>
+    </div>
+
+    <div class="config-section" id="duct-mount-section" style="display:none;">
+      <h3>Duct Mounting</h3>
+      <div class="options-grid" id="duct-mount-options">
+        <button class="option-btn active" data-val="integrated">Integrated into Body</button>
+        <button class="option-btn" data-val="independent">Independent Parts</button>
+      </div>
+    </div>
+
+    <div class="config-section" id="blower-section">
+      <h3>Part Cooling Blower</h3>
+      <div class="options-grid" id="blower-options"></div>
+    </div>
+
+    <div class="config-section" id="extruder-section">
+      <h3>Extruder</h3>
+      <div class="options-grid" id="extruder-options"></div>
+    </div>
+
+    <div class="config-section" id="rail-section">
+      <h3>Linear Rail</h3>
+      <div class="options-grid" id="rail-options"></div>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const PALETTE = {
+  body: { color: 0x444444, metalness: 0.1, roughness: 0.7, name: "Toolhead Body" },
+  duct: { color: 0x5a1a9a, metalness: 0.1, roughness: 0.4, name: "Cooling Duct", opacity: 0.7, transparent: true },
+  mount: { color: 0x1a1a1a, metalness: 0.2, roughness: 0.8, name: "Mount / Bracket" },
+  'fan-mount': { color: 0x4a9eff, metalness: 0.3, roughness: 0.5, name: "Fan Mount" },
+  support: { color: 0x666666, metalness: 0.1, roughness: 0.8, name: "Structural Support" },
+  default: { color: 0x888888, metalness: 0.1, roughness: 0.8, name: "Part" }
+};
+
+const CONFIG = {
+  v3: {
+    hotends: [
+      { id: 'tricorn', name: 'Tricorn', parts: ['V3-Beta/Bodies/body_tricorn_sherpa-mini_{blower}_v3.glb'], hasDuctOption: true },
+      { id: 'goliath', name: 'Goliath-CHC-XL', parts: ['V3-Beta/Bodies/body_goliath-chcxl_sherpa-mini_{blower}_v3.glb', 'V3-Beta/Fan-Mounts/fan-mount_2510_goliath-chcxl_v3.glb'], hasDuctOption: false },
+      { id: 'rapido', name: 'Rapido-UHF', parts: ['V3-Beta/Bodies/body_rapido-uhf_sherpa-mini_{blower}_v3.glb', 'V3-Beta/Fan-Mounts/fan-mount_2510_rapido-uhf_v3.glb'], hasDuctOption: false },
+      { id: 'chc-xl-micro', name: 'CHC-XL (Sherpa Micro)', parts: ['V3-Beta/Bodies/body_chc-xl_sherpa-micro_v3.glb', 'V3-Beta/Fan-Mounts/fan-mount_2510_chc-xl_v3.glb', 'V3-Beta/Supports/support_duct_generic_v3.glb'], hasDuctOption: false }
+    ],
+    blowers: [
+      { id: '7040', name: 'WS7040', parts: ['V3-Beta/Ducts/duct_7040_v3.glb'] },
+      { id: '9290', name: 'WS9290', parts: ['V3-Beta/Ducts/duct_9290_v3.glb'] }
+    ],
+    extruders: [
+      { id: 'sherpa-mini', name: 'Sherpa Mini', parts: ['V3-Beta/Supports/support_duct_sherpa-mini_v3.glb'] },
+      { id: 'sherpa-micro', name: 'Sherpa Micro', parts: [] }
+    ],
+    rails: [
+      { id: 'mgn12', name: 'MGN12', parts: ['V3-Beta/Mounts/mount_mgn12_belt-clip_left_v3.glb', 'V3-Beta/Mounts/mount_mgn12_belt-clip_right_v3.glb'] },
+      { id: 'mgn9', name: 'MGN9', parts: ['V3-Beta/Mounts/mount_mgn9_belt-clamp_left_v3.glb', 'V3-Beta/Mounts/mount_mgn9_belt-clamp_right_v3.glb'] }
+    ]
+  },
+  v2: {
+    hotends: [
+      { id: 'tricorn', name: 'Tricorn', parts: ['V2-Stable/Bodies/body_tricorn_sherpa_v2.glb', 'V2-Stable/Ducts/duct_tricorn_v2.glb', 'V2-Stable/Mounts/mount_bracket_sherpa_tricorn_v2.glb', 'V2-Stable/Supports/support_top_sherpa_tricorn_v2.glb'], hasDuctOption: false },
+      { id: 'rapido', name: 'Rapido-UHF', parts: ['V2-Stable/Bodies/body_rapido-uhf_sherpa_v2.glb', 'V2-Stable/Ducts/duct_rapido-uhf_v2.glb', 'V2-Stable/Mounts/mount_bracket_sherpa_rapido_v2.glb', 'V2-Stable/Supports/support_top_sherpa_rapido_v2.glb'], hasDuctOption: false },
+      { id: 'orbiter', name: 'Orbiter (Single Inlet)', parts: ['V2-Stable/Bodies/body_tricorn_orbiter_single-inlet_v2.glb', 'V2-Stable/Ducts/duct_single-inlet_v2.glb', 'V2-Stable/Supports/support_top_orbiter_v2.glb'], hasDuctOption: false }
+    ],
+    blowers: [{ id: 'integrated', name: 'Integrated', parts: [] }],
+    extruders: [{ id: 'integrated', name: 'Integrated', parts: [] }],
+    rails: [{ id: 'integrated', name: 'Integrated', parts: [] }]
+  }
+};
+
+let currentSelection = {
+  version: 'v3',
+  hotend: 'tricorn',
+  ductMount: 'integrated',
+  blower: '7040',
+  extruder: 'sherpa-mini',
+  rail: 'mgn12'
+};
+
+const wrap = document.getElementById('canvas-wrap');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+renderer.shadowMap.enabled = true;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+wrap.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0f12);
+
+const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 1, 5000);
+camera.position.set(300, 300, 300);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+const hemi = new THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
+scene.add(hemi);
+
+const sun = new THREE.DirectionalLight(0xffffff, 1.2);
+sun.position.set(150, 250, 150);
+sun.castShadow = true;
+scene.add(sun);
+
+const blueFill = new THREE.DirectionalLight(0x4a9eff, 0.6);
+blueFill.position.set(-150, 100, -150);
+scene.add(blueFill);
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const tooltip = document.getElementById('tooltip');
+let hoveredObj = null;
+
+const loader = new GLTFLoader();
+const modelGroup = new THREE.Group();
+scene.add(modelGroup);
+
+let currentLoadId = 0;
+const setStatus = t => document.getElementById('load-status').textContent = t;
+
+function getPartType(path) {
+  const filename = path.split('/').pop().toLowerCase();
+  if (filename.startsWith('body_')) return 'body';
+  if (filename.startsWith('duct_')) return 'duct';
+  if (filename.startsWith('mount_')) return 'mount';
+  if (filename.startsWith('fan-mount_')) return 'fan-mount';
+  if (filename.startsWith('support_')) return 'support';
+  return 'default';
+}
+
+async function updateModel() {
+  const loadId = ++currentLoadId;
+  setStatus('Loading parts...');
+  
+  while(modelGroup.children.length > 0) {
+    modelGroup.remove(modelGroup.children[0]);
+  }
+
+  const verData = CONFIG[currentSelection.version];
+  const selectedHotend = verData.hotends.find(h => h.id === currentSelection.hotend);
+  const selectedBlower = verData.blowers.find(b => b.id === currentSelection.blower);
+  const selectedExtruder = verData.extruders.find(e => e.id === currentSelection.extruder);
+  const selectedRail = verData.rails.find(r => r.id === currentSelection.rail);
+
+  let partsToLoad = [];
+  if (selectedHotend) partsToLoad.push(...selectedHotend.parts);
+  
+  
+  if (currentSelection.version === 'v3') {
+    if (selectedHotend.id === 'tricorn' && currentSelection.ductMount === 'independent') {
+      if (selectedBlower) partsToLoad.push(...selectedBlower.parts);
+    }
+    
+  } else {
+    
+    if (selectedBlower) partsToLoad.push(...selectedBlower.parts);
+  }
+
+  if (selectedExtruder) partsToLoad.push(...selectedExtruder.parts);
+  if (selectedRail) partsToLoad.push(...selectedRail.parts);
+
+  const uniqueParts = [...new Set(partsToLoad)].map(p => p.replace('{blower}', currentSelection.blower));
+
+  const loadPromises = uniqueParts.map(path => {
+    return new Promise((resolve) => {
+      loader.load('Parts/' + path, 
+        gltf => {
+          if (loadId !== currentLoadId) return resolve();
+          const type = getPartType(path);
+          const pData = PALETTE[type] || PALETTE.default;
+          let meshIdx = 0;
+          gltf.scene.traverse(node => {
+            if (node.isMesh) {
+              node.castShadow = true;
+              node.receiveShadow = true;
+              const baseColor = new THREE.Color(pData.color);
+              const variations = [1.0, 0.8, 1.2, 0.9, 1.1];
+              baseColor.multiplyScalar(variations[meshIdx % variations.length]);
+              meshIdx++;
+              node.material = new THREE.MeshStandardMaterial({
+                color: baseColor,
+                metalness: pData.metalness, roughness: pData.roughness,
+                transparent: pData.transparent || false, opacity: pData.opacity || 1.0,
+                emissive: new THREE.Color(0x000000)
+              });
+              node.userData.typeName = pData.name;
+              node.userData.filename = path.split('/').pop().replace(/\.[^/.]+$/, '');
+            }
+          });
+          modelGroup.add(gltf.scene);
+          resolve();
+        },
+        undefined,
+        err => { console.warn('Failed to load:', path); resolve(); }
+      );
+    });
+  });
+
+  await Promise.all(loadPromises);
+  if (loadId !== currentLoadId) return;
+
+  const box = new THREE.Box3().setFromObject(modelGroup);
+  if (!box.isEmpty()) {
+    const center = box.getCenter(new THREE.Vector3());
+    controls.target.copy(center);
+  }
+  controls.update();
+  setStatus('Configurator Ready');
+}
+
+window.addEventListener('mousemove', (e) => {
+  const canvasBounds = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((e.clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1;
+  mouse.y = -((e.clientY - canvasBounds.top) / canvasBounds.height) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(modelGroup.children, true);
+  if (intersects.length > 0) {
+    const obj = intersects[0].object;
+    if (hoveredObj !== obj) {
+      if (hoveredObj && hoveredObj.material.emissive) hoveredObj.material.emissive.set(0, 0, 0);
+      hoveredObj = obj;
+      if (hoveredObj.material.emissive) hoveredObj.material.emissive.set(0x333333);
+    }
+    tooltip.style.display = 'block';
+    tooltip.style.left = (e.clientX + 15) + 'px';
+    tooltip.style.top = (e.clientY + 15) + 'px';
+    tooltip.innerHTML = `<strong>${obj.userData.typeName}</strong><br><span style="opacity:0.6">${obj.userData.filename}</span>`;
+  } else {
+    if (hoveredObj && hoveredObj.material.emissive) hoveredObj.material.emissive.set(0, 0, 0);
+    hoveredObj = null;
+    tooltip.style.display = 'none';
+  }
+});
+
+const checkFileExists = async (path) => { try { const response = await fetch(path, { method: 'HEAD' }); return response.ok; } catch { return false; } }; function renderOptions() {
+  const verData = CONFIG[currentSelection.version];
+  const renderGroup = async (id, data, currentKey) => {
+    const container = document.getElementById(id);
+    container.innerHTML = '';
+    const validOptions = await Promise.all(
+  data.map(async (opt) => {
+    if (!opt.parts || opt.parts.length === 0) return null;
+    const allFilesExist = await Promise.all(
+      opt.parts.map((part) =>
+        checkFileExists(`Parts/${part.replace('{blower}', currentSelection.blower)}`)
+      )
+    );
+    return allFilesExist.every(Boolean) ? opt : null;
+  })
+);
+
+validOptions.filter(Boolean).forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn' + (opt.id === currentSelection[currentKey] ? ' active' : '');
+      btn.textContent = opt.name;
+      btn.onclick = () => { currentSelection[currentKey] = opt.id; renderOptions(); updateModel(); };
+      container.appendChild(btn);
+    });
+  };
+  renderGroup('hotend-options', verData.hotends, 'hotend');
+  renderGroup('blower-options', verData.blowers, 'blower');
+  renderGroup('extruder-options', verData.extruders, 'extruder');
+  renderGroup('rail-options', verData.rails, 'rail');
+  
+  
+  const selectedHotend = verData.hotends.find(h => h.id === currentSelection.hotend);
+  const ductSect = document.getElementById('duct-mount-section');
+  ductSect.style.display = (currentSelection.version === 'v3' && selectedHotend.id === 'tricorn') ? 'block' : 'none';
+}
+
+document.querySelectorAll('#version-options .option-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('#version-options .option-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSelection.version = btn.dataset.val;
+    const verData = CONFIG[currentSelection.version];
+    currentSelection.hotend = verData.hotends[0].id;
+    currentSelection.blower = verData.blowers[0].id;
+    currentSelection.extruder = verData.extruders[0].id;
+    currentSelection.rail = verData.rails[0].id;
+    renderOptions();
+    updateModel();
+  };
+});
+
+document.querySelectorAll('#duct-mount-options .option-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('#duct-mount-options .option-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSelection.ductMount = btn.dataset.val;
+    updateModel();
+  };
+});
+
+window.addEventListener('resize', () => {
+  renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+  camera.aspect = wrap.clientWidth / wrap.clientHeight;
+  camera.updateProjectionMatrix();
+});
+
+function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); }
+
+renderOptions();
+updateModel();
+animate();
+</script>
+</body>
+</html>
