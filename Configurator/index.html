@@ -128,14 +128,15 @@
     background: rgba(19, 22, 27, 0.95);
     border: 1px solid var(--accent);
     color: white;
-    padding: 8px 14px;
+    padding: 12px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'DM Mono', monospace;
-    pointer-events: none;
     z-index: 1000;
     box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    pointer-events: auto;
   }
+  #tooltip.visible { display: block; }
 </style>
 </head>
 <body>
@@ -152,6 +153,7 @@
   <div id="panel">
     <div id="panel-header">
       <h2>Hardware Selection</h2>
+      <button id="download-all-btn" class="option-btn" style="margin-top: 10px; background: var(--accent); color: white; text-align: center;">Download Configuration (ZIP)</button>
     </div>
 
     <div class="config-section">
@@ -191,6 +193,8 @@
     </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <script type="importmap">
 {
@@ -366,6 +370,7 @@ async function updateModel() {
               });
               node.userData.typeName = pData.name;
               node.userData.filename = path.split('/').pop().replace(/\.[^/.]+$/, '');
+              node.userData.fullPath = path;
             }
           });
           modelGroup.add(gltf.scene);
@@ -389,8 +394,21 @@ async function updateModel() {
   setStatus('Configurator Ready');
 }
 
-window.addEventListener('mousemove', (e) => {
+window.addEventListener('click', (e) => {
   const canvasBounds = renderer.domElement.getBoundingClientRect();
+  const isOverCanvas = e.clientX >= canvasBounds.left && e.clientX <= canvasBounds.right &&
+                       e.clientY >= canvasBounds.top && e.clientY <= canvasBounds.bottom;
+  const isOverTooltip = e.target.closest('#tooltip');
+
+  if (!isOverCanvas && !isOverTooltip) {
+    if (hoveredObj && hoveredObj.material.emissive) hoveredObj.material.emissive.set(0, 0, 0);
+    hoveredObj = null;
+    tooltip.classList.remove('visible');
+    return;
+  }
+  
+  if (isOverTooltip) return;
+
   mouse.x = ((e.clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1;
   mouse.y = -((e.clientY - canvasBounds.top) / canvasBounds.height) * 2 + 1;
   raycaster.setFromCamera(mouse, camera);
@@ -402,16 +420,71 @@ window.addEventListener('mousemove', (e) => {
       hoveredObj = obj;
       if (hoveredObj.material.emissive) hoveredObj.material.emissive.set(0x333333);
     }
-    tooltip.style.display = 'block';
+    tooltip.classList.add('visible');
     tooltip.style.left = (e.clientX + 15) + 'px';
     tooltip.style.top = (e.clientY + 15) + 'px';
-    tooltip.innerHTML = `<strong>${obj.userData.typeName}</strong><br><span style="opacity:0.6">${obj.userData.filename}</span>`;
+    // Use a cleaner way to get the path: store the relative path in userData
+    // Update the mesh traversal in updateModel first to store this...
+    // For now, let's try to map the filename back to the path using the known structure
+    const path = obj.userData.fullPath;
+    tooltip.innerHTML = `<strong>${obj.userData.typeName}</strong><br><span style="opacity:0.6">${obj.userData.filename}</span><br><br><a href="Parts/${path.replace('.glb', '.stl')}" download style="color:var(--accent2); font-size:12px; text-decoration:underline;">Download STL</a>`;
   } else {
     if (hoveredObj && hoveredObj.material.emissive) hoveredObj.material.emissive.set(0, 0, 0);
     hoveredObj = null;
-    tooltip.style.display = 'none';
+    tooltip.classList.remove('visible');
   }
 });
+
+document.getElementById('download-all-btn').onclick = async () => {
+  const zip = new JSZip();
+  const verData = CONFIG[currentSelection.version];
+  const parts = [];
+  const selectedHotend = verData.hotends.find(h => h.id === currentSelection.hotend);
+  const selectedBlower = verData.blowers.find(b => b.id === currentSelection.blower);
+  const selectedExtruder = verData.extruders.find(e => e.id === currentSelection.extruder);
+  const selectedRail = verData.rails.find(r => r.id === currentSelection.rail);
+
+  if (selectedHotend) parts.push(...selectedHotend.parts);
+  if (currentSelection.version === 'v3') {
+     if (selectedHotend.id === 'tricorn' && currentSelection.ductMount === 'independent') {
+       if (selectedBlower) parts.push(...selectedBlower.parts);
+     }
+  } else {
+     if (selectedBlower) parts.push(...selectedBlower.parts);
+  }
+  if (selectedExtruder) parts.push(...selectedExtruder.parts);
+  if (selectedRail) parts.push(...selectedRail.parts);
+
+  const uniquePaths = [...new Set(parts)].map(p => p.replace('{blower}', currentSelection.blower));
+
+  setStatus('Preparing ZIP...');
+  let downloadedCount = 0;
+  for (const path of uniquePaths) {
+    try {
+      const stlPath = 'Parts/' + path.replace('.glb', '.stl');
+      const response = await fetch(stlPath);
+      if (response.ok) {
+        const blob = await response.blob();
+        const fileName = path.split('/').pop().replace('.glb', '.stl');
+        zip.file(fileName, blob);
+        downloadedCount++;
+      }
+    } catch(e) { console.error('Error adding to zip:', e); }
+  }
+  
+  if (downloadedCount === 0) {
+    alert("No STL files found for the current configuration.");
+    setStatus('Ready');
+    return;
+  }
+  
+  const content = await zip.generateAsync({type: 'blob'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(content);
+  a.download = `sphinx-config-${currentSelection.version}-${Date.now()}.zip`;
+  a.click();
+  setStatus('Download complete');
+};
 
 const checkFileExists = async (path) => { try { const response = await fetch(path, { method: 'HEAD' }); return response.ok; } catch { return false; } }; function renderOptions() {
   const verData = CONFIG[currentSelection.version];
