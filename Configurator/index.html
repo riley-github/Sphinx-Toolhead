@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sphinx Toolhead Configurator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap');
 
@@ -21,9 +21,42 @@
     --panel-w: 350px;
   }
 
-  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; touch-action: none; }
 
   #app { display: flex; width: 100%; height: 100%; }
+  #menu-toggle { display: none; }
+
+  @media (max-width: 768px) {
+    #app { flex-direction: column; }
+    #canvas-wrap { flex: 1; }
+    #panel {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 100%;
+      max-width: 350px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 20;
+    }
+    #panel.open { transform: translateX(0); }
+    #menu-toggle {
+      display: none;
+      position: absolute;
+      top: 10px; right: 10px;
+      z-index: 30;
+      padding: 12px;
+      background: var(--accent);
+      border-radius: 8px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    #menu-toggle svg { width: 24px; height: 24px; }
+  }
+
+  @media (max-width: 768px) {
+    #menu-toggle { display: flex; }
+  }
 
   #canvas-wrap {
     flex: 1;
@@ -145,6 +178,13 @@
   <div id="canvas-wrap">
     <div id="topbar">
       <h1>Sphinx Configurator</h1>
+    </div>
+    <div id="menu-toggle">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
     </div>
     <div id="load-status">Idle</div>
     <div id="tooltip"></div>
@@ -507,7 +547,8 @@ validOptions.filter(Boolean).forEach((opt) => {
       const btn = document.createElement('button');
       btn.className = 'option-btn' + (opt.id === currentSelection[currentKey] ? ' active' : '');
       btn.textContent = opt.name;
-      btn.onclick = () => { currentSelection[currentKey] = opt.id; renderOptions(); updateModel(); };
+      btn.onclick = () => { currentSelection[currentKey] = opt.id; renderOptions();
+    updateModel(); };
       container.appendChild(btn);
     });
   };
@@ -555,6 +596,18 @@ window.addEventListener('resize', () => {
 function animate() { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); }
 
 renderOptions();
+
+document.getElementById('menu-toggle').onclick = () => {
+  document.getElementById('panel').classList.toggle('open');
+};
+
+document.querySelectorAll('.option-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+        document.getElementById('panel').classList.remove('open');
+    }
+  });
+});
 updateModel();
 animate();
 </script>

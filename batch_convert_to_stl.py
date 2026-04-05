@@ -21,8 +21,6 @@ def convert_step_to_stl(input_path, output_path):
         print(f"Error converting {input_path}: {e}")
 
 def batch_convert(src_dir, dest_dir):
-    if os.path.exists(dest_dir):
-        shutil.rmtree(dest_dir)
     os.makedirs(dest_dir, exist_ok=True)
 
     for root, dirs, files in os.walk(src_dir):
