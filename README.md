@@ -14,14 +14,6 @@ If you use this toolhead and modify or remix, please upload here or let me know 
 
 ---
 
-## 🛠️ Sphinx Toolhead Configurator
-
-We now provide an interactive 3D configurator to help you select the right parts for your specific hardware setup:
-
-- **[Launch Configurator (Beta)](Configurator/configurator.html)**
-
-The configurator allows you to select your belt path and Hotend visualize the assembly and ensure you download the correct parts from the 'Voron' and 'Monolith' directory.
-
 ---
 
 ## 🧩 Notes
