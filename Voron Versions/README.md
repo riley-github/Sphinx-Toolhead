@@ -38,13 +38,23 @@ The clamps are what make these Voron-specific. If you are on a Monolith carriage
 
 ---
 
-## 🖨️ Print Settings
-
+Generally Settings
 - 8 walls
 - 8 top / bottom layers
 - 40% infill
 
-Siraya Tech ABS-CF is tested and known good; any filled ABS or better is recommended.
+For best COM results try to have slicer masses for each part close to what is listed below:
+| Part | Slicer Mass Estimates |
+|---|---|
+| `sphinx_main_body_<hotend>` | 90g |
+| `left_clamp_monolith` | 1-2g |
+| `right_clamp_monolith` | 1-2g |
+| `extruder_mount` | 20g |
+| `sherpa_bracket` | 17g |
+| `mid_support` | 6-7g |
+| `rear_duct` | 34g |
+
+Any filled ABS or better is recommended.  
 
 ---
 
