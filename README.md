@@ -32,6 +32,8 @@ The current and most up to date version of Sphinx is called Sphinx tLW. This ver
 |:-----------:|:----------:|
 | <img src="Images/Nefroh_Sphinx_TLW.png" alt="Nefroh Sphinx tLW" width="300"> | <img src="Images/generikv_sphinx_tLW.png" alt="generikv Sphinx tLW" width="300"> |
 
+Big thanks to discord users xyglotop and generikv for these images
+
 ---
 
 ## 📈 Input Shaper Results
