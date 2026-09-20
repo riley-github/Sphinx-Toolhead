@@ -44,9 +44,7 @@ The current and most up to date version of Sphinx is called Sphinx tLW. This ver
 
 ## ⚙️ Mass Specs / COM
 
- <img src="Images/IMG_4381.jpeg" width="300">
-
- Center of mass is left lower to account for un measured wires and CPAP hose mass
+ <img src="Images/sphinx_TLW_COM.png" width="300">
 
  
 ---
