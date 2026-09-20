@@ -26,7 +26,7 @@ The current and most up to date version of Sphinx is called Sphinx tLW. This ver
 
 ---
 
-## 📸 Pictures (Sphinx tWL)
+## 📸 Pictures (Sphinx tLW)
 
 | | |
 |:-----------:|:----------:|
