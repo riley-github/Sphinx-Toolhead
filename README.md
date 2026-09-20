@@ -9,7 +9,7 @@ Sphinx is a **work in progress!** If you have any suggested feel free to reach o
 
 If you use this toolhead and modify or remix, please upload here or let me know on Instagram or Discord!  
 📸 Instagram: [@practically_printed](https://instagram.com/practically_printed)  
-💬 Sphinx Development Channel: https://discord.gg/PdSYQn8kq
+💬 Sphinx Development Channel: [sphinx-dev](https://discord.gg/Rgn6Q9szn)
 
 
 ---
