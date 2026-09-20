@@ -31,8 +31,8 @@ Seven STEP files — six shared across every build, plus one hotend-specific mai
 | `right_clamp_monolith` | Monolith carriage mount |
 | `extruder_mount` | Sherpa Mini |
 | `sherpa_bracket` | Sherpa Mini |
-| `mid_support` | |
-| `rear_duct` | Part cooling |
+| `mid_support` | Common part |
+| `rear_duct` | Common Part |
 
 The clamps are what make these Monolith-specific. If you are on a Voron-style carriage, use the [Voron Versions](../Voron%20Versions) folder instead — those ship `left_clamp_voron` / `right_clamp_voron` in place of these.
 
@@ -40,11 +40,23 @@ The clamps are what make these Monolith-specific. If you are on a Voron-style ca
 
 ## 🖨️ Print Settings
 
+Generally Settings
 - 8 walls
 - 8 top / bottom layers
 - 40% infill
 
-Siraya Tech ABS-CF is tested and known good; any filled ABS or better is recommended.
+For best COM results try to have slicer masses for each part close to what is listed below:
+| Part | Slicer Mass Estimates |
+|---|---|
+| `sphinx_main_body_<hotend>` | 90g |
+| `left_clamp_monolith` | 1-2g |
+| `right_clamp_monolith` | 1-2g |
+| `extruder_mount` | 20g |
+| `sherpa_bracket` | 17g |
+| `mid_support` | 6-7g |
+| `rear_duct` | 34g |
+
+Any filled ABS or better is recommended. Individuals have printed Sphinx out of anything from ABS-GF to PEEK
 
 ---
 
