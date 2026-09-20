@@ -26,11 +26,11 @@ The current and most up to date version of Sphinx is called Sphinx tLW. This ver
 
 ---
 
-## 📸 Pictures (Outdated Pictures of Gen1 Sphinx)
+## 📸 Pictures (Sphinx tWL)
 
-<img src="Images/IMG_2683.jpeg" alt="Sphinx Toolhead" width="300">
+<img src="Images/Nefroh_Sphinx_TLW.png" alt="generikv_sphinx_tLW" width="300">
 
-<img src="Images/IMG_2677.jpeg" alt="Sphinx Toolhead" width="300">
+<img src="Images/generikv_sphinx_tLW.png" alt="Sphinx Toolhead" width="300">
 
 ---
 
@@ -70,10 +70,10 @@ The current and most up to date version of Sphinx is called Sphinx tLW. This ver
 ## 🔧 Hardware in Progress
 
 **Hotends:**    
-- Chube Compact    
+- None unless requested    
 
 **Extruders:**  
-- Orbiter 2.0 (maybe)   
+- Orbiter 2.0   
   
 
 ---
@@ -90,7 +90,7 @@ The toolhead is built specifically around the duct geometry to maximize usable a
 
 ## Other Information
 
-Sphinx is meant to be used with an mgn12H rail carriage. I higher preload x rail is encouraged for best Input Shaper results 
+Sphinx is meant to be used with an mgn12H rail carriage. A higher preload x rail is encouraged for best Input Shaper results 
 
 COM for this toolhead was optimized using CNC Sherpa Mini and Tricorn, but will also be should be pretty similar with all other hotends
 
@@ -100,8 +100,6 @@ Tested successfully with **Siraya Tech ABS-CF**, though any filled abs or better
 
 ## Acknowledgements
 
-Apex clips: https://github.com/ApexArray/ApexClips
-
-Huge shout out to everyone in the Excit3d discord for helping me test and develop this toolhead! Couldn't have done it without their help
+Huge shout out to everyone in the Excit3d and Monolith discord for helping me test and develop this toolhead! Couldn't have done it without their help
 
 *© Sphinx Toolhead Project – Open-source and community-driven.*
