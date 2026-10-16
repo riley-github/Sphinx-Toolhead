@@ -39,7 +39,7 @@ Both use an FDM printed cpap ducts. (Ducts will be uploaded before 11/2026)
 
 Pick the folder matching your carriage.
 
-### `monolith/`
+### `monolith/` (Carbonara Friendly)
 
 | File | Part |
 |---|---|
