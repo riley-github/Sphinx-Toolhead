@@ -60,9 +60,15 @@ All files are STEP (AP242), exported from Onshape in millimetre-scale metric uni
 
 ## 📸 Pictures
 
-<!-- CAD renders and center of mass images to be added here -->
+### CAD
 
-_CAD renders and center of mass figures coming soon._
+| Isometric | Front |
+|:-----------:|:----------:|
+| <img src="Images/cnSphinx_cad_iso.png" alt="cnSphinx CAD isometric view" width="300"> | <img src="Images/cnSphinx_cad_front.png" alt="cnSphinx CAD front view" width="300"> |
+
+### Center of Mass
+
+<img src="Images/cnSphinx_com.webp" alt="cnSphinx mass properties and center of mass" width="400">
 
 ---
 
