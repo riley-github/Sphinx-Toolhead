@@ -8,13 +8,13 @@ A CNC-plate variant of the Sphinx toolhead. Long hotend compatibility coming soo
 
 ## 🧩 Design
 
-cnSphinx is built around **two CNC cut plates** that carry the toolhead, paired with a **center housing** available in two forms:
+cnSphinx is built around **two CNC cut plates** — a hotend plate and an extruder plate — that carry the toolhead, paired with a **center housing** available in two forms:
 
 - **SLM** — SLM printed out of aluminum
 - **FDM** — printed, for anyone without SLM access
 
 Both center options drop into the same plate pair, so the choice is yours based on what you can source.
-Both use an FDM printed cpap ducts. (Ducts will be uploaded before 11/2026)
+Both use FDM printed cpap ducts. Ducts for both supported hotends are in `common/`.
 
 ---
 
@@ -35,9 +35,24 @@ Both use an FDM printed cpap ducts. (Ducts will be uploaded before 11/2026)
 
 ---
 
+## 🔩 Hardware
+
+- **2 × M3×30 standoffs (through hole)** — required
+
+---
+
 ## 📁 Files
 
-Pick the folder matching your carriage.
+Everything in `common/` is required regardless of carriage. After that, pick the folder matching yours.
+
+### `common/`
+
+| File | Part |
+|---|---|
+| `hotend_plate.step` | Hotend plate — CNC cut |
+| `extruder_plate.step` | Extruder plate — CNC cut |
+| `Tricorn_Short_duct.step` | CPAP duct, Tricorn Short — FDM printed |
+| `chube_compact_duct.step` | CPAP duct, Chube Compact — FDM printed |
 
 ### `monolith/` (Carbonara Friendly)
 
