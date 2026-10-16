@@ -1,6 +1,6 @@
 # cnSphinx
 
-A CNC-plate variant of the Sphinx toolhead.
+A CNC-plate variant of the Sphinx toolhead. Long hotend compatibility coming soon
 
 > ⚠️ **Work in progress.** cnSphinx is under active development and has not been finalised. Geometry, hardware compatibility and fitment are all subject to change, and the files here may be revised or replaced without notice. Print, cut or machine at your own risk, and check back for updates before committing to a batch.
 
@@ -10,7 +10,7 @@ A CNC-plate variant of the Sphinx toolhead.
 
 cnSphinx is built around **two CNC cut plates** that carry the toolhead, paired with a **center housing** available in two forms:
 
-- **SLM** — metal, laser powder bed fusion
+- **SLM** — SLM printed out of aluminum
 - **FDM** — printed, for anyone without SLM access
 
 Both center options drop into the same plate pair, so the choice is yours based on what you can source.
@@ -20,7 +20,7 @@ Both use an FDM printed cpap ducts. (Ducts will be uploaded before 11/2026)
 
 ## ⚙️ Compatibility
 
-**Hotends**
+**Hotends** - designed for both hotends to run in conduction
 - Chube Compact
 - Tricorn Short
 
