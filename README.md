@@ -104,4 +104,16 @@ Tested successfully with **Siraya Tech ABS-CF**, though any filled abs or better
 
 Huge shout out to everyone in the Excit3d and Monolith discord for helping me test and develop this toolhead! Couldn't have done it without their help
 
-*© Sphinx Toolhead Project – Open-source and community-driven.*
+---
+
+## 📄 License
+
+Sphinx is released under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](LICENSE) (CC BY-NC-SA 4.0).
+
+- **Attribution** — credit the Sphinx Toolhead Project
+- **NonCommercial** — no commercial use or sale without permission
+- **ShareAlike** — remixes must be shared under these same terms
+
+This is not an OSI-approved open source license. Please reach out on Discord if you want to discuss commercial use.
+
+*© Sphinx Toolhead Project – Community-driven and free to remix for non-commercial use.*
