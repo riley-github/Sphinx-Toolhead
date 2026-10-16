@@ -14,6 +14,7 @@ cnSphinx is built around **two CNC cut plates** that carry the toolhead, paired 
 - **FDM** — printed, for anyone without SLM access
 
 Both center options drop into the same plate pair, so the choice is yours based on what you can source.
+Both use an FDM printed cpap ducts. (Ducts will be uploaded before 11/2026)
 
 ---
 
