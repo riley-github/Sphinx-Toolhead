@@ -60,7 +60,7 @@ Everything in `common/` is required regardless of carriage. After that, pick the
 |---|---|
 | `slm_monolith - left_belt_clip.step` | Left belt clip |
 | `slm_monolith - right_belt_clip.step` | Right belt clip |
-| `slm_monolith_center.step` | Center housing |
+| `slm_monolith_center.step` | Center housing — SLM |
 
 ### `voron/`
 
@@ -68,7 +68,8 @@ Everything in `common/` is required regardless of carriage. After that, pick the
 |---|---|
 | `slm_voron - left_clip.step` | Left clip |
 | `slm_voron - right_clip.step` | Right clip |
-| `slm_voron_center.step` | Center housing |
+| `slm_voron_center.step` | Center housing — SLM |
+| `fdm_voron_center.step` | Center housing — FDM |
 
 All files are STEP (AP242), exported from Onshape in millimetre-scale metric units.
 
