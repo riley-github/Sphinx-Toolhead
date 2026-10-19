@@ -61,6 +61,7 @@ Everything in `common/` is required regardless of carriage. After that, pick the
 | `slm_monolith - left_belt_clip.step` | Left belt clip |
 | `slm_monolith - right_belt_clip.step` | Right belt clip |
 | `slm_monolith_center.step` | Center housing — SLM |
+| `fdm_monolith_center.step` | Center housing — FDM |
 
 ### `voron/`
 
