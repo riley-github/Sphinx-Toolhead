@@ -1,6 +1,6 @@
 # Sphinx Toolhead — Hardware BOM
 
-Fasteners and inserts for Sphinx tLW. The **common hardware** is the same for the Voron and Monolith versions. Add **one hotend kit** for the hotend you're running.
+Fasteners and inserts for Sphinx tLW. The **common hardware** is the same for the Voron and Monolith versions. Be sure to look at the hardware for your specific hotend.
 
 All screws are **button head (BHCS)** unless noted.
 
