@@ -67,6 +67,8 @@ Big thanks to discord users xyglotop and generikv for these images
 - Beacon
 - Cartographer
 
+📋 **Screws, nuts and heat-set inserts:** see the [Hardware BOM](BOM.md).
+
 ---
 
 ## 🔧 Hardware in Progress
