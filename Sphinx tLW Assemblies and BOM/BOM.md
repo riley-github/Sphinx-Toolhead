@@ -4,7 +4,7 @@ Fasteners and inserts for Sphinx tLW. The **common hardware** is the same for th
 
 All screws are **button head (BHCS)** unless noted.
 
-[← Back to README](README.md)
+[← Back to README](../README.md)
 
 ---
 

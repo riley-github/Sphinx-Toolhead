@@ -67,7 +67,7 @@ Big thanks to discord users xyglotop and generikv for these images
 - Beacon
 - Cartographer
 
-📋 **Screws, nuts and heat-set inserts:** see the [Hardware BOM](BOM.md).
+📋 **Screws, nuts and heat-set inserts:** see the [Hardware BOM](Sphinx%20tLW%20Assemblies%20and%20BOM/BOM.md).
 
 ---
 
