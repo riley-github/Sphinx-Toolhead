@@ -51,8 +51,8 @@ Everything in `common/` is required regardless of carriage. After that, pick the
 |---|---|
 | `hotend_plate.step` | Hotend plate — CNC cut |
 | `extruder_plate.step` | Extruder plate — CNC cut |
-| `Tricorn_Short_duct.step` | CPAP duct, Tricorn Short — FDM printed |
-| `chube_compact_duct.step` | CPAP duct, Chube Compact — FDM printed |
+| `tricornShort_duct.step` | CPAP duct, Tricorn Short — FDM printed |
+| `chubeCompact_duct.step` | CPAP duct, Chube Compact — FDM printed |
 
 ### `monolith/` (Carbonara Friendly)
 
