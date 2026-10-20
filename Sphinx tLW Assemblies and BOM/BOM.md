@@ -2,7 +2,7 @@
 
 Fasteners and inserts for Sphinx tLW. The **common hardware** is the same for the Voron and Monolith versions. Be sure to look at the hardware for your specific hotend.
 
-l**Button head (BHCS)** screws are needed to for the extruder mount otherwise the type of m3 isn't critical. 
+**Button head (BHCS)** screws are needed to for the extruder mount otherwise the type of m3 isn't critical. 
 
 [← Back to README](../README.md)
 
