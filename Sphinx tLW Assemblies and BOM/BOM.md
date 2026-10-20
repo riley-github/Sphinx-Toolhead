@@ -42,7 +42,7 @@ All screws are **button head (BHCS)** unless noted.
 
 ---
 
-## Hotend kits
+## Hotend Hardware
 
 Pick the row for your hotend and add it to the common totals.
 
