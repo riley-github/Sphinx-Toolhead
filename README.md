@@ -58,7 +58,6 @@ Big thanks to discord users xyglotop and generikv for these images
 - Goliath
 - CHC XL
 - RapidoX
-- Rapido 2 UHF
 - Rapido UHF
 - Dragon UHF
 
