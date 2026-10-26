@@ -78,6 +78,12 @@ All files are STEP (AP242), exported from Onshape in millimetre-scale metric uni
 
 ## 📸 Pictures
 
+### Prototype build
+
+| Front | Side |
+|:-----------:|:----------:|
+| <img src="Images/cnSphinx_build_front.jpg" alt="cnSphinx prototype front view with Sherpa extruder, CNC plates and FDM center housing" width="300"> | <img src="Images/cnSphinx_build_side.jpg" alt="cnSphinx prototype side view showing plate stack, M3x30 standoff and CPAP duct" width="300"> |
+
 ### CAD
 
 | Isometric | Front |
