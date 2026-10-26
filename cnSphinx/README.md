@@ -6,6 +6,14 @@ A CNC-plate variant of the Sphinx toolhead. Long hotend compatibility coming soo
 
 ---
 
+## 📸 Prototype Build
+
+| Front | Side |
+|:-----------:|:----------:|
+| <img src="Images/cnSphinx_build_front.jpg" alt="cnSphinx prototype front view with Sherpa extruder, CNC plates and FDM center housing" width="300"> | <img src="Images/cnSphinx_build_side.jpg" alt="cnSphinx prototype side view showing plate stack, M3x30 standoff and CPAP duct" width="300"> |
+
+---
+
 ## 🧩 Design
 
 cnSphinx is built around **two CNC cut plates** — a hotend plate and an extruder plate — that carry the toolhead, paired with a **center housing** available in two forms:
@@ -77,12 +85,6 @@ All files are STEP (AP242), exported from Onshape in millimetre-scale metric uni
 ---
 
 ## 📸 Pictures
-
-### Prototype build
-
-| Front | Side |
-|:-----------:|:----------:|
-| <img src="Images/cnSphinx_build_front.jpg" alt="cnSphinx prototype front view with Sherpa extruder, CNC plates and FDM center housing" width="300"> | <img src="Images/cnSphinx_build_side.jpg" alt="cnSphinx prototype side view showing plate stack, M3x30 standoff and CPAP duct" width="300"> |
 
 ### CAD
 
