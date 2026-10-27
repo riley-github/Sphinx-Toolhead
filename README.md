@@ -105,7 +105,7 @@ Tested successfully with **Siraya Tech ABS-CF**, though any filled abs or better
 
 ## ☕ Support Sphinx
 
-Want to help support my prototyping and development work? Sphinx has been shaped by testers and feedback from the community. If you'd like to chip in, tips on [Ko-fi](https://ko-fi.com/rileyrandall) help me keep iterating. Never expected, always appreciated.
+Want to help support my prototyping and development work? Sphinx has been shaped by testers and feedback from the community. If you'd like to chip in, tips on [Ko-fi](https://ko-fi.com/rileyrandall) help me keep iterating and adding hardware compatibility. Never expected, always appreciated.
 
 ---
 
