@@ -103,6 +103,12 @@ Tested successfully with **Siraya Tech ABS-CF**, though any filled abs or better
 
 ---
 
+## ☕ Support Sphinx
+
+Want to help support my prototyping and development work? Sphinx has been shaped by testers and feedback from the community. If you'd like to chip in, tips on [Ko-fi](https://ko-fi.com/rileyrandall) help me keep iterating. Never expected, always appreciated.
+
+---
+
 ## Acknowledgements
 
 Huge shout out to everyone in the Excit3d and Monolith discord for helping me test and develop this toolhead! Couldn't have done it without their help
